@@ -8,7 +8,7 @@
   const text = ref<RawMan[]>([])
 
   setInterval(async () => {
-    text.value = await fetchMans('45188', '2', new Date('2025-08-15 09:55:15'), 0, false)
+    text.value = await fetchMans('', '', new Date('2025-08-15 09:55:15'), 0, false)
   }, 1000)
 </script>
 
