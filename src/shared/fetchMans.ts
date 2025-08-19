@@ -6,14 +6,7 @@
 import { type Man, type RawMan } from '@/types/Man'
 
 const orgeo_url = 'https://orgeo.ru'
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const top_url = orgeo_url + '/online/top'
 const titles_url = orgeo_url + '/online/titles'
-// const files_url = orgeo_url + '/files'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ignored_top = [6, 8, 20, 22, 23, 26, 27, 28, 29, 30]
-// const ignored_last = ignored_top.concat([2, 3, 4, 5, 7, 24, 25])
 
 // Example: Validation result type
 export interface ValidationResult {
