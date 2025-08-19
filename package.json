@@ -1,5 +1,5 @@
 {
-  "name": "nodecg-roller-race-titles",
+  "name": "rooller-titles-vue",
   "version": "0.0.0",
   "description": "",
   "homepage": "",
@@ -59,17 +59,23 @@
     "compatibleRange": "^2.3.0",
     "dashboardPanels": [
       {
-        "name": "example",
-        "title": "Example",
-        "file": "example/main.html",
-        "width": 3
+        "name": "roller-race-titles",
+        "title": "Roller race titles",
+        "file": "app/main.html",
+        "width": 4
       }
     ],
     "graphics": [
       {
-        "file": "example/main.html",
+        "file": "app/main.html",
         "width": 1920,
         "height": 1080
+      }
+    ],
+    "mount": [
+      {
+        "directory": "shared",
+        "endpoint": "shared"
       }
     ]
   },
