@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { useHead } from '@unhead/vue'
   import { ref } from 'vue'
-  import { fetchMans } from '../../browser_shared/fetchMans'
+  import { fetchMans } from '../../shared/fetchMans'
   import type { RawMan } from '../../types/Man'
 
   useHead({ title: 'nodecg-roller-race-titles' }) // set the title of this page

@@ -5,13 +5,13 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.extension.tsbuildinfo",
     "rootDir": "./src/extension",
     "outDir": "./extension",
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": true
   },
   "include": [
+    "src/shared/**/*.ts",
+    "src/shared/**/*.vue",
     "./src/extension/**/*.ts",
     "./src/types/**/*.d.ts"
   ],
-  "exclude": [
-    "./src/types/augment-window.d.ts"
-  ]
+  "exclude": ["./src/types/augment-window.d.ts"]
 }
