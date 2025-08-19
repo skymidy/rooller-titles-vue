@@ -3,7 +3,7 @@
 
 // fetchAndValidate.ts
 // Data fetch and validation logic extracted from right Vue component
-import { rawManToMan, type Man, type RawMan } from '../types'
+import { type Man, type RawMan } from '@/types/Man'
 
 const orgeo_url = 'https://orgeo.ru'
 
@@ -77,5 +77,28 @@ export function validateMan(rawMan: RawMan): ValidationResult {
     warnings,
     info,
     need_ignore,
+  }
+}
+
+export function rawManToMan(raw: RawMan): Man {
+  return {
+    name: raw.name,
+    group: raw.dist,
+    start: raw.start ?? '',
+    finish: raw.finish ?? '',
+    finish_ms: raw.finish_ms != null && raw.finish_ms !== '' ? Number(raw.finish_ms) : null,
+    result_status: raw.otm != null && raw.otm !== '' ? Number(raw.otm) : null,
+    lap: raw.lap != null && raw.lap !== '' ? Number(raw.lap) : null,
+    relay: raw.relay,
+    radio_json: raw.radio,
+    flag: null,
+    splits_json: raw.spl ?? null,
+    split_comments_json: raw.spl_comment ?? null,
+    bib: raw.number,
+    team: raw.team ?? null,
+    udate_unix: raw.udate_unix ?? null,
+    year: raw.year != null && raw.year !== '' ? Number(raw.year) : null,
+    dist_tag: null,
+    score: raw.score != null && raw.score !== '' ? Number(raw.score) : null,
   }
 }
