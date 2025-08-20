@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { fetchEvent } from '@/shared/fetchEvents'
-  import type { EventData } from '@/types/Event'
+  import type { EventData, Sub } from '@/types/Event'
   import { useHead } from '@unhead/vue'
   import { ref } from 'vue'
 
@@ -8,6 +8,9 @@
   // const text = ref('Example')
   const selectedEvent = ref<EventData>()
   const eventsOptions = ref<EventData[]>([])
+
+  const subsOptions = ref<Sub[]>([])
+  const selectedSub = ref<Sub>()
 </script>
 
 <template>
@@ -87,34 +90,19 @@
 
     <q-select
       v-if="selectedEvent !== undefined"
-      v-model="selectedEvent"
+      v-model="selectedSub"
       filled
       use-input
       hide-selected
       fill-input
       clearable
       input-debounce="0"
-      label="Event Search"
-      :options="eventsOptions"
-      :option-label="'event_id'"
-      :option-value="'event_id'"
+      label="Sub selector"
+      :options="subsOptions"
+      :option-label="'name'"
+      :option-value="'sub_id'"
       style="width: 250px"
       map-options
-      @filter="
-        async (inputValue: string, update, abort) => {
-          if (inputValue.length <= 3) {
-            abort()
-            return
-          }
-          const result = await fetchEvent(inputValue)
-          update(() => {
-            eventsOptions.splice(0)
-            eventsOptions.push(result)
-            console.log(eventsOptions)
-          })
-        }
-      "
-      @filter-abort="() => {}"
     >
       <template #no-option>
         <q-item>
@@ -123,19 +111,12 @@
       </template>
       <template #option="scope">
         <q-item v-bind="scope.itemProps">
-          <q-item-section avatar>
-            <q-img :src="`${scope.opt.logo}`" />
-          </q-item-section>
           <q-item-section>
             <q-item-label>
-              {{
-                scope.opt.subs.length > 0 && scope.opt.sub_id.length > 0
-                  ? scope.opt.subs[Number(scope.opt.sub_id)].event_name
-                  : '- Null -'
-              }}
+              {{ scope.opt.name ?? '-- Null --' }}
             </q-item-label>
             <q-item-label caption>
-              {{ scope.opt.geoname }}
+              {{ scope.opt.sub_id }}
             </q-item-label>
           </q-item-section>
         </q-item>
