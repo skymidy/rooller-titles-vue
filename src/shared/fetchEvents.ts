@@ -1,4 +1,5 @@
 import type { EventData } from '@/types/Event'
+import { eventDataRebuilder } from './lib/utils'
 
 // TypeScript version of the find_event logic
 export const orgeo_url = 'https://orgeo.ru'
@@ -24,5 +25,5 @@ export async function fetchEvent(event_id: string): Promise<EventData> {
 
   const data: EventData = await response.json()
 
-  return data
+  return eventDataRebuilder(data)
 }

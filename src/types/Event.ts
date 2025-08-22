@@ -6,7 +6,7 @@ export const POINT_FINISH_VALUE = 'Finish'
 export const DEFAULT_LAP_VALUE = 'Lap'
 export const DEFAULT_SCORE_VALUE = 'sc.'
 
-export interface Sub {
+export type SubEvent = {
   sub_id: string
   name: string
   radio_texts: string | undefined
@@ -15,21 +15,21 @@ export interface Sub {
   has_flags: boolean
   id: string
   event_name: string
-  udate: Date
+  udate: string
 }
 
-export interface EventInfo {
+export type EventInfo = {
   name: string | null
   city: string | null
   logo: string | null
 }
 
-export interface EventData {
+export type EventData = {
   event_id: string
   event_sub_dists: { dist_tag: string }[]
   teams: Array<string>
   dist: Array<string>
-  subs: Array<Sub>
+  subs: Array<SubEvent>
   sub_id: string
   geoname: string
   logo: string | null
