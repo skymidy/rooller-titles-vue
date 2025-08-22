@@ -10,7 +10,7 @@ export function eventDataRebuilder(source: EventData): EventData {
     event_id: source.event_id,
     event_sub_dists: source.event_sub_dists,
     teams: source.teams,
-    dist: source.dist,
+    dists: source.dists,
     subs: source.subs.map(subEventDataRebuilder),
     sub_id: source.sub_id,
     geoname: source.geoname,

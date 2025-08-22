@@ -12,7 +12,7 @@ export interface EventData {
 		dist_tag?: string;
 	}[];
 	teams?: string[];
-	dist?: string[];
+	dists?: string[];
 	subs?: SubEvent[];
 	sub_id?: string;
 	geoname?: string;

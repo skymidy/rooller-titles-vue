@@ -28,7 +28,7 @@ export type EventData = {
   event_id: string
   event_sub_dists: { dist_tag: string }[]
   teams: Array<string>
-  dist: Array<string>
+  dists: Array<string>
   subs: Array<SubEvent>
   sub_id: string
   geoname: string

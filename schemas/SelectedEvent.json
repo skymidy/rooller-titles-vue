@@ -19,7 +19,7 @@
       "type": "array",
       "items": { "type": "string" }
     },
-    "dist": {
+    "dists": {
       "type": "array",
       "items": { "type": "string" }
     },
