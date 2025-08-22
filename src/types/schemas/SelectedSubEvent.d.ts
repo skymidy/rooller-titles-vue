@@ -6,14 +6,14 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export interface Sub {
-	sub_id: string;
-	name: string;
+export interface SubEvent {
+	sub_id?: string;
+	name?: string;
 	radio_texts?: string | null;
-	timezone: string;
-	datetime: string;
-	has_flags: boolean;
-	id: string;
-	event_name: string;
-	udate: string;
+	timezone?: string;
+	datetime?: string;
+	has_flags?: boolean;
+	id?: string;
+	event_name?: string;
+	udate?: string;
 }

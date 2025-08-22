@@ -3,3 +3,8 @@ import type { Configschema } from './schemas'
 
 export type NodeCGServerAPI = NodeCG.default.ServerAPI<Configschema>
 export type * as Schemas from './schemas'
+
+export type {
+  EventData as EventDataSchema,
+  SubEvent as SubEventSchema,
+} from '@/types/schemas/SelectedEvent'

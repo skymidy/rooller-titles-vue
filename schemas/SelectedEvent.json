@@ -12,8 +12,7 @@
         "additionalProperties": false,
         "properties": {
           "dist_tag": { "type": "string" }
-        },
-        "required": ["dist_tag"]
+        }
       }
     },
     "teams": {
@@ -26,7 +25,7 @@
     },
     "subs": {
       "type": "array",
-      "items": { "$ref": "SelectedSub.json" }
+      "items": { "$ref": "SelectedSubEvent.json" }
     },
     "sub_id": { "type": "string" },
     "geoname": { "type": "string" },
@@ -34,15 +33,5 @@
     "unix_timestamp": { "type": "number" },
     "banner_top": { "type": ["string", "null"] },
     "banner_bottom": { "type": ["string", "null"] }
-  },
-  "required": [
-    "event_id",
-    "event_sub_dists",
-    "teams",
-    "dist",
-    "subs",
-    "sub_id",
-    "geoname",
-    "unix_timestamp"
-  ]
+  }
 }
