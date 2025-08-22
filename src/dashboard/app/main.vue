@@ -4,9 +4,15 @@
   import type { IEvent, ISubEvent } from '@/types/Event'
   import { useHead } from '@unhead/vue'
   import { useReplicant } from 'nodecg-vue-composable'
-  import { ref, watch } from 'vue'
+  import { onMounted, ref, watch } from 'vue'
 
   useHead({ title: 'nodecg-roller-race-titles' }) // set the title of this page
+  onMounted(() => {
+    if (selectedEventReplicant !== undefined)
+      selectedEvent.value = selectedEventReplicant.data as IEvent
+    if (selectedSubEventReplicant !== undefined)
+      selectedSubEvent.value = selectedSubEventReplicant.data as ISubEvent
+  })
 
   //controll block over Events
   const selectedEventReplicant = useReplicant<EventSchema>('SelectedEvent', 'rooller-titles-vue')
@@ -14,13 +20,10 @@
   const eventsOptions = ref<IEvent[]>([])
   watch(selectedEvent, (value, oldvalue) => {
     if (value === oldvalue) return
-    if (value !== undefined) {
-      subEventsOptions.value = value.subs
-    } else {
-      subEventsOptions.value = []
+
+    if (value === undefined || value.event_id !== selectedSubEvent.value?.id) {
       selectedSubEvent.value = undefined
     }
-
     if (selectedEventReplicant !== undefined) {
       if (value !== undefined) selectedEventReplicant.data = value
       else selectedEventReplicant.loadDefault()
@@ -134,7 +137,7 @@
       filled
       fill-input
       label="Sub selector"
-      :options="subEventsOptions"
+      :options="selectedEvent.subs"
       :option-label="'name'"
       :option-value="'sub_id'"
       style="width: 450px"
