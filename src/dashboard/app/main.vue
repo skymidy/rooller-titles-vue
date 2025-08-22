@@ -1,26 +1,53 @@
 <script setup lang="ts">
   import { fetchEvent } from '@/shared/fetchEvents'
-  import type { EventData, Sub } from '@/types/Event'
+  import type { EventDataSchema, SubEventSchema } from '@/types'
+  import type { EventData, SubEvent } from '@/types/Event'
   import { useHead } from '@unhead/vue'
+  import { useReplicant } from 'nodecg-vue-composable'
   import { ref, watch } from 'vue'
 
   useHead({ title: 'nodecg-roller-race-titles' }) // set the title of this page
-  // const text = ref('Example')
+
+  //controll block over Events
+  const selectedEventReplicant = useReplicant<EventDataSchema>(
+    'SelectedEvent',
+    'rooller-titles-vue',
+  )
   const selectedEvent = ref<EventData>()
   const eventsOptions = ref<EventData[]>([])
-
   watch(selectedEvent, (value, oldvalue) => {
     if (value === oldvalue) return
     if (value !== undefined) {
-      subsOptions.value = value.subs
+      subEventsOptions.value = value.subs
     } else {
-      subsOptions.value = []
-      selectedSub.value = undefined
+      subEventsOptions.value = []
+      selectedSubEvent.value = undefined
+    }
+
+    if (selectedEventReplicant !== undefined) {
+      if (value !== undefined) selectedEventReplicant.data = value
+      else selectedEventReplicant.loadDefault()
+      selectedEventReplicant.save()
     }
   })
 
-  const subsOptions = ref<Sub[]>([])
-  const selectedSub = ref<Sub>()
+  //controll block over SebEvents
+  const selectedSubEventReplicant = useReplicant<SubEventSchema>(
+    'SelectedSubEvent',
+    'rooller-titles-vue',
+  )
+  const subEventsOptions = ref<SubEvent[]>([])
+  const selectedSubEvent = ref<SubEvent>()
+  watch(selectedSubEvent, (value, oldvalue) => {
+    if (value === oldvalue) return
+
+    if (selectedSubEventReplicant !== undefined) {
+      if (value !== undefined) selectedSubEventReplicant.data = value
+      else selectedSubEventReplicant.loadDefault()
+      selectedSubEventReplicant.save()
+      console.log(selectedSubEventReplicant.data)
+    }
+  })
 </script>
 
 <template>
@@ -31,7 +58,6 @@
       use-input
       hide-selected
       fill-input
-      clearable
       input-debounce="0"
       label="Event Search"
       :options="eventsOptions"
@@ -53,8 +79,14 @@
           })
         }
       "
-      @filter-abort="() => {}"
     >
+      <template v-if="selectedEvent" #append>
+        <q-icon
+          name="cancel"
+          class="cursor-pointer"
+          @click.stop.prevent="selectedEvent = undefined"
+        />
+      </template>
       <template #no-option>
         <q-item>
           <q-item-section class="text-grey"> No results </q-item-section>
@@ -86,7 +118,9 @@
           <q-img class="rounded-borders" :src="`${selectedEvent.logo}`" />
         </q-card-section>
         <q-card-section class="q-pt-xs">
-          <div class="text-overline text-grey">{{ selectedEvent.geoname }}</div>
+          <div class="text-overline text-grey">
+            {{ selectedEvent.geoname }}
+          </div>
           <div class="text-subtitle1">
             {{
               selectedEvent.subs.length > 0 && selectedEvent.sub_id.length > 0
@@ -100,19 +134,23 @@
 
     <q-select
       v-if="selectedEvent !== undefined"
-      v-model="selectedSub"
+      v-model="selectedSubEvent"
       filled
-      hide-selected
       fill-input
-      clearable
-      input-debounce="0"
       label="Sub selector"
-      :options="subsOptions"
+      :options="subEventsOptions"
       :option-label="'name'"
       :option-value="'sub_id'"
-      style="width: 250px"
+      style="width: 450px"
       map-options
     >
+      <template v-if="selectedSubEvent" #append>
+        <q-icon
+          name="cancel"
+          class="cursor-pointer"
+          @click.stop.prevent="selectedSubEvent = undefined"
+        />
+      </template>
       <template #no-option>
         <q-item>
           <q-item-section class="text-grey"> No results </q-item-section>
