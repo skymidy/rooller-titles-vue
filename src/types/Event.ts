@@ -6,7 +6,7 @@ export const POINT_FINISH_VALUE = 'Finish'
 export const DEFAULT_LAP_VALUE = 'Lap'
 export const DEFAULT_SCORE_VALUE = 'sc.'
 
-export type SubEvent = {
+export type ISubEvent = {
   sub_id: string
   name: string
   radio_texts: string | undefined
@@ -24,12 +24,12 @@ export type EventInfo = {
   logo: string | null
 }
 
-export type EventData = {
+export type IEvent = {
   event_id: string
   event_sub_dists: { dist_tag: string }[]
   teams: Array<string>
   dists: Array<string>
-  subs: Array<SubEvent>
+  subs: Array<ISubEvent>
   sub_id: string
   geoname: string
   logo: string | null

@@ -1,12 +1,12 @@
-import type { EventData, SubEvent } from '@/types/Event'
+import type { IEvent, ISubEvent } from '@/types/Event'
 
 export function quasarLoadBarFilter(url: string) {
   // example (only https://my-service.com/* should trigger)
   return /^https:\/\/orgeo\.ru/.test(url)
 }
 
-export function eventDataRebuilder(source: EventData): EventData {
-  const newObject: EventData = {
+export function eventDataRebuilder(source: IEvent): IEvent {
+  const newObject: IEvent = {
     event_id: source.event_id,
     event_sub_dists: source.event_sub_dists,
     teams: source.teams,
@@ -21,8 +21,8 @@ export function eventDataRebuilder(source: EventData): EventData {
   }
   return newObject
 }
-export function subEventDataRebuilder(source: SubEvent): SubEvent {
-  const newObject: SubEvent = {
+export function subEventDataRebuilder(source: ISubEvent): ISubEvent {
+  const newObject: ISubEvent = {
     sub_id: source.sub_id,
     name: source.name,
     radio_texts: source.radio_texts,

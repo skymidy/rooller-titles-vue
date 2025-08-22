@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { fetchEvent } from '@/shared/fetchEvents'
-  import type { EventDataSchema, SubEventSchema } from '@/types'
-  import type { EventData, SubEvent } from '@/types/Event'
+  import type { EventSchema, SubEventSchema } from '@/types'
+  import type { IEvent, ISubEvent } from '@/types/Event'
   import { useHead } from '@unhead/vue'
   import { useReplicant } from 'nodecg-vue-composable'
   import { ref, watch } from 'vue'
@@ -9,12 +9,9 @@
   useHead({ title: 'nodecg-roller-race-titles' }) // set the title of this page
 
   //controll block over Events
-  const selectedEventReplicant = useReplicant<EventDataSchema>(
-    'SelectedEvent',
-    'rooller-titles-vue',
-  )
-  const selectedEvent = ref<EventData>()
-  const eventsOptions = ref<EventData[]>([])
+  const selectedEventReplicant = useReplicant<EventSchema>('SelectedEvent', 'rooller-titles-vue')
+  const selectedEvent = ref<IEvent>()
+  const eventsOptions = ref<IEvent[]>([])
   watch(selectedEvent, (value, oldvalue) => {
     if (value === oldvalue) return
     if (value !== undefined) {
@@ -36,8 +33,7 @@
     'SelectedSubEvent',
     'rooller-titles-vue',
   )
-  const subEventsOptions = ref<SubEvent[]>([])
-  const selectedSubEvent = ref<SubEvent>()
+  const selectedSubEvent = ref<ISubEvent>()
   watch(selectedSubEvent, (value, oldvalue) => {
     if (value === oldvalue) return
 
