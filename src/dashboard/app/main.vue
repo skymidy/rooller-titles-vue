@@ -2,12 +2,22 @@
   import { fetchEvent } from '@/shared/fetchEvents'
   import type { EventData, Sub } from '@/types/Event'
   import { useHead } from '@unhead/vue'
-  import { ref } from 'vue'
+  import { ref, watch } from 'vue'
 
   useHead({ title: 'nodecg-roller-race-titles' }) // set the title of this page
   // const text = ref('Example')
   const selectedEvent = ref<EventData>()
   const eventsOptions = ref<EventData[]>([])
+
+  watch(selectedEvent, (value, oldvalue) => {
+    if (value === oldvalue) return
+    if (value !== undefined) {
+      subsOptions.value = value.subs
+    } else {
+      subsOptions.value = []
+      selectedSub.value = undefined
+    }
+  })
 
   const subsOptions = ref<Sub[]>([])
   const selectedSub = ref<Sub>()
@@ -92,7 +102,6 @@
       v-if="selectedEvent !== undefined"
       v-model="selectedSub"
       filled
-      use-input
       hide-selected
       fill-input
       clearable
