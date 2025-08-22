@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Sub",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "sub_id": { "type": "string" },
+    "name": { "type": "string" },
+    "radio_texts": { "type": ["string", "null"] },
+    "timezone": { "type": "string" },
+    "datetime": { "type": "string", "format": "date-time" },
+    "has_flags": { "type": "boolean" },
+    "id": { "type": "string" },
+    "event_name": { "type": "string" },
+    "udate": { "type": "string", "format": "date-time" }
+  },
+  "required": ["sub_id", "name", "timezone", "datetime", "has_flags", "id", "event_name", "udate"]
+}

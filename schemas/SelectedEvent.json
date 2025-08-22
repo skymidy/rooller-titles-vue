@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EventData",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "event_id": { "type": "string" },
+    "event_sub_dists": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "dist_tag": { "type": "string" }
+        },
+        "required": ["dist_tag"]
+      }
+    },
+    "teams": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "dist": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "subs": {
+      "type": "array",
+      "items": { "$ref": "SelectedSub.json" }
+    },
+    "sub_id": { "type": "string" },
+    "geoname": { "type": "string" },
+    "logo": { "type": ["string", "null"] },
+    "unix_timestamp": { "type": "number" },
+    "banner_top": { "type": ["string", "null"] },
+    "banner_bottom": { "type": ["string", "null"] }
+  },
+  "required": [
+    "event_id",
+    "event_sub_dists",
+    "teams",
+    "dist",
+    "subs",
+    "sub_id",
+    "geoname",
+    "unix_timestamp"
+  ]
+}
