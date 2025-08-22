@@ -1,4 +1,4 @@
-import type { EventData } from '@/types/Event'
+import type { IEvent } from '@/types/Event'
 import { eventDataRebuilder } from './lib/utils'
 
 // TypeScript version of the find_event logic
@@ -9,7 +9,7 @@ const titles_url = orgeo_url + '/online/titles'
 // const files_url = orgeo_url + '/files'
 const ignored_top = [6, 8, 20, 22, 23, 26, 27, 28, 29, 30]
 
-export async function fetchEvent(event_id: string): Promise<EventData> {
+export async function fetchEvent(event_id: string): Promise<IEvent> {
   if (Number.isNaN(event_id)) {
     throw new TypeError('event_id must be a number')
   }
@@ -23,7 +23,7 @@ export async function fetchEvent(event_id: string): Promise<EventData> {
 
   if (!response.ok) throw new Error(response.statusText)
 
-  const data: EventData = await response.json()
+  const data: IEvent = await response.json()
 
   return eventDataRebuilder(data)
 }
